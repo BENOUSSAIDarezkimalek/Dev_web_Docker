@@ -39,6 +39,18 @@ def delete(data_id):
     db.session.delete(data)
     db.session.commit()
     return redirect(url_for('assos'))
+@app.route('/modifier/<int:data_id>', methods=['GET', 'POST'])
+def modifier(data_id):
+    data = Data.query.get(data_id)
+
+    if request.method == 'POST':
+        data.rna_id = request.form['rna_id']
+        data.rna_id_ex = request.form['rna_id_ex']
+        data.gestion = request.form['gestion']
+        db.session.commit()
+        return redirect(url_for('assos'))
+    return render_template('modifier.html', data=data)
+
 
 if __name__ == '_main_':
     app.run()
