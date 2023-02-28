@@ -22,7 +22,8 @@
             <td>{{ data.rna_id_ex}}</td>
             <td>{{ data.gestion}}</td>
             <td>
-                
+                <a href="{{ url_for('modifier', data_id=data.id) }}" class="btnform">Modifier</a>
+
                 <a href="{{ url_for('delete', data_id=data.id) }}" class="btn btn-danger btn-sm">Supprimer</a>
             </td>
 

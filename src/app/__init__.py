@@ -51,6 +51,19 @@ def modifier(data_id):
         return redirect(url_for('assos'))
     return render_template('modifier.html', data=data)
 
+@app.route('/ajouter', methods=['GET', 'POST'])
+def ajouter():
+    if request.method == 'POST':
+        rna_id = request.form['rna_id']
+        rna_id_ex = request.form['rna_id_ex']
+        gestion = request.form['gestion']
+        new_data = Data(rna_id=rna_id, rna_id_ex=rna_id_ex, gestion=gestion)
+        db.session.add(new_data)
+        db.session.commit()
+        return redirect(url_for('assos'))
+    return render_template('ajouter.html')
+
+
 
 if __name__ == '_main_':
     app.run()
