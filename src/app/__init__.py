@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template , request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 import os
 
@@ -32,6 +32,13 @@ def hello(name=None):
 def assos():
     datas = Data.query.limit(10).all()
     return render_template('assos.html', datas=datas)
+
+@app.route('/delete/<int:data_id>')
+def delete(data_id):
+    data = Data.query.get(data_id)
+    db.session.delete(data)
+    db.session.commit()
+    return redirect(url_for('assos'))
 
 if __name__ == '_main_':
     app.run()

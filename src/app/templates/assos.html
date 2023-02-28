@@ -9,17 +9,26 @@
             <th>RNA ID</th>
             <th>RNA ID EX</th>
             <th>Gestion</th>
+            <th>Editer</th>
+            
         </tr>
     </thead>
     <tbody>
+        
         {% for data in datas %}
         <tr>
             <td>{{ data.id}}</td>
             <td>{{ data.rna_id}}</td>
             <td>{{ data.rna_id_ex}}</td>
             <td>{{ data.gestion}}</td>
+            <td>
+                
+                <a href="{{ url_for('delete', data_id=data.id) }}" class="btn btn-danger btn-sm">Supprimer</a>
+            </td>
+
+            
         </tr>
         {% endfor %}
     </tbody>
 </table>
-{% endblock %}
+{% endblock %}
