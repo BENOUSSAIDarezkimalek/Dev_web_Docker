@@ -1,37 +1,37 @@
-{% extends 'base.html' %} {% block title %}
-<title>Page assos</title>
-{% endblock %} {% block content %}
-<h1>Assos page</h1>
-<a href="{{ url_for('ajouter') }}" class="btn btn-primary btn-sm">Ajouter</a>
+    {% extends 'base.html' %} {% block title %}
+    <title>Page assos</title>
+    {% endblock %} {% block content %}
+    <h1>Assos page</h1>
+    <a href="{{ url_for('ajouter') }}" class="button">Ajouter</a>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>RNA ID</th>
-            <th>RNA ID EX</th>
-            <th>Gestion</th>
-            <th>Editer</th>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>RNA ID</th>
+                <th>RNA ID EX</th>
+                <th>Gestion</th>
+                <th>Editer</th>
+                
+            </tr>
+        </thead>
+        <tbody>
             
-        </tr>
-    </thead>
-    <tbody>
-        
-        {% for data in datas %}
-        <tr>
-            <td>{{ data.id}}</td>
-            <td>{{ data.rna_id}}</td>
-            <td>{{ data.rna_id_ex}}</td>
-            <td>{{ data.gestion}}</td>
-            <td>
-                <a href="{{ url_for('modifier', data_id=data.id) }}" class="btnform">Modifier</a>
+            {% for data in datas %}
+            <tr>
+                <td>{{ data.id}}</td>
+                <td>{{ data.rna_id}}</td>
+                <td>{{ data.rna_id_ex}}</td>
+                <td>{{ data.gestion}}</td>
+                <td>
+                    <a href="{{ url_for('modifier', data_id=data.id) }}" class="btnform">Modifier</a>
 
-                <a href="{{ url_for('delete', data_id=data.id) }}" class="btn btn-danger btn-sm">Supprimer</a>
-            </td>
+                    <a href="{{ url_for('delete', data_id=data.id) }}" class="btn btn-danger btn-sm">Supprimer</a>
+                </td>
 
-            
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% endblock %}
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}
