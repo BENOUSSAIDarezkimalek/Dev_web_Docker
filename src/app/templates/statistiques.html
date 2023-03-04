@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>Statistiques</title>{% endblock %}
+
+{% block content %}
+  <h1>Statistiques</h1>
+  <div id="graph"></div>
+
+  <!-- Le script qui va tracer le graphique -->
+  <script>
+    var data = JSON.parse('{{ graph_data|safe }}');
+    Plotly.newPlot('graph', data.data, data.layout);
+  </script>
+{% endblock %}

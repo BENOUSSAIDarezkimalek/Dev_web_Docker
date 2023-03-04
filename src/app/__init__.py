@@ -1,6 +1,7 @@
-from flask import Flask, render_template , request, redirect, url_for
+from flask import Flask, render_template , request, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
+import json
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
@@ -39,6 +40,7 @@ def delete(data_id):
     db.session.delete(data)
     db.session.commit()
     return redirect(url_for('assos'))
+
 @app.route('/modifier/<int:data_id>', methods=['GET', 'POST'])
 def modifier(data_id):
     data = Data.query.get(data_id)
@@ -63,6 +65,27 @@ def ajouter():
         return redirect(url_for('assos'))
     return render_template('ajouter.html')
 
+@app.route('/statistiques')
+def statistiques():
+    datas = Data.query.all()
+
+    # Préparer les données pour le graphique Plotly
+    gestion_count = {}
+    for d in datas:
+        if d.gestion in gestion_count:
+            gestion_count[d.gestion] += 1
+        else:
+            gestion_count[d.gestion] = 1
+
+    gestion_values = list(gestion_count.values())
+    gestion_labels = list(gestion_count.keys())
+    data = {
+        'data': [{'values': gestion_values, 'labels': gestion_labels, 'type': 'pie'}],
+        'layout': {'title': 'Répartition des données par gestion'}
+    }
+
+    # Renvoyer la page HTML de statistiques avec le graphique Plotly
+    return render_template('statistiques.html', graph_data=json.dumps(data))
 
 
 if __name__ == '_main_':

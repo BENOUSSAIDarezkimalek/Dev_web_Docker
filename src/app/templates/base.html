@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css')}}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     {% block title %}<title>titre par defaut</title>{% endblock %}
     <title>Document</title>
 </head>
@@ -15,9 +18,10 @@
             <li><a href="/about" >about</a></li>
             <li><a href="/hello">hello</a></li>
             <li><a href="/assos">assos</a></li>
-            <li><a href="/assos_edit"></a></li>
+            <li><a href="/statistiques">statistiques</a></li>
+            
         </ul>
     </nav>
-    {% block content %}{% endblock %}
+    {% block content %}{% endblock %}   
 </body>
 </html>
