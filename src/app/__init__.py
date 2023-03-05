@@ -65,8 +65,8 @@ def ajouter():
         return redirect(url_for('assos'))
     return render_template('ajouter.html')
 
-@app.route('/statistiques')
-def statistiques():
+@app.route('/Dashboard')
+def Dashboard():
     datas = Data.query.all()
 
     # Préparer les données pour le graphique Chart.js
@@ -85,7 +85,7 @@ def statistiques():
     }
 
     # Renvoyer la page HTML de statistiques avec le graphique Chart.js
-    return render_template('statistiques.html', graph_data=json.dumps(data))
+    return render_template('Dashboard.html', graph_data=json.dumps(data))
 
 
 
