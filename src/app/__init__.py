@@ -31,7 +31,7 @@ def hello(name=None):
 
 @app.route('/assos')
 def assos():
-    datas = Data.query.limit(10).all()
+    datas = Data.query.limit(20).all()
     return render_template('assos.html', datas=datas)
 
 @app.route('/delete/<int:data_id>')
@@ -69,7 +69,7 @@ def ajouter():
 def statistiques():
     datas = Data.query.all()
 
-    # Préparer les données pour le graphique Plotly
+    # Préparer les données pour le graphique Chart.js
     gestion_count = {}
     for d in datas:
         if d.gestion in gestion_count:
@@ -80,12 +80,13 @@ def statistiques():
     gestion_values = list(gestion_count.values())
     gestion_labels = list(gestion_count.keys())
     data = {
-        'data': [{'values': gestion_values, 'labels': gestion_labels, 'type': 'pie'}],
-        'layout': {'title': 'Répartition des données par gestion'}
+        'values': gestion_values,
+        'labels': gestion_labels
     }
 
-    # Renvoyer la page HTML de statistiques avec le graphique Plotly
+    # Renvoyer la page HTML de statistiques avec le graphique Chart.js
     return render_template('statistiques.html', graph_data=json.dumps(data))
+
 
 
 if __name__ == '_main_':
