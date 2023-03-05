@@ -18,6 +18,8 @@
   <!-- Le script qui va tracer le graphique -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
+
+    //graphe en cercle 
     var data = JSON.parse('{{ graph_data|safe }}');
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
