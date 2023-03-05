@@ -3,9 +3,14 @@
 {% block title %}<title>Dashboard</title>{% endblock %}
 
 {% block content %}
-  <h1>répartition des associations par gestion </h1>
+  <h1>répartition des associations par gestion (en cercle) </h1>
   <div style="width: 400px; height: 400px; text-align: center; margin: auto;">
     <canvas id="myChart" width="400" height="400"></canvas>
+  </div>
+
+  <h1>répartition des associations par gestion (en barre)</h1>
+  <div style="width: 400px; height: 400px; text-align: center; margin: auto;">
+    <canvas id="myBarChart" width="400" height="400"></canvas>
   </div>
   
   
@@ -55,5 +60,35 @@
         }
       }
     });
+
+    //graphe en barres
+    var barData = JSON.parse('{{ graph_data|safe }}');
+    var barCtx = document.getElementById('myBarChart').getContext('2d');
+    var myBarChart = new Chart(barCtx, {
+      type: 'bar',
+      data: {
+        labels: barData.labels,
+        datasets: [{
+          label: 'Nombre d\'association',
+          data: barData.values,
+          backgroundColor: '#3cba9f'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          display: false
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
   </script>
+ 
 {% endblock %}
